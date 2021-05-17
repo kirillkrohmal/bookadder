@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Optional;
 
 public class BookServiceImpl implements BookService {
-
     @Autowired
     BookRepository bookRepository;
 
@@ -19,8 +18,8 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Optional<Book> findById(Long id) {
-        return bookRepository.findById(id);
+    public Book findById(Long id) {
+        return bookRepository.findById(id).orElse(null);
     }
 
     @Override
@@ -35,15 +34,15 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Book update(Book book, Long id) {
-        Book entity = bookRepository.findById(id);
+        Book entity = bookRepository.findById (id).orElse(null);
 
-        if(book.getAuthor() != null) entity.setAuthor(book.getAuthor());
-        if(book.getDescription() != null) bookRepository.findById (id);
-        if(book.getIsbn() != null) bookRepository.findById (id);
-        if(book.getTitle() != null) bookRepository.findById (id);
-        if(book.getImageData() != null) bookRepository.findById (id);
-        if(book.getImageStr() != null) bookRepository.findById (id);
-        if(book.getYear() != 0) bookRepository.findById (id);
+        if(book.getAuthor() != null) entity.setAuthor (book.getAuthor());
+        if(book.getDescription() != null) entity.setDescription (book.getDescription());
+        if(book.getIsbn() != null) entity.setIsbn (book.getIsbn());
+        if(book.getTitle() != null) entity.setTitle (book.getTitle());
+        if(book.getImageData() != null) entity.setImageData (book.getImageData());
+        if(book.getImageStr() != null) entity.setImageStr (book.getImageStr());
+        if(book.getYear() != 0) entity.setYear (book.getYear());
 
         entity.setReadAlready (book.isReadAlready());
 
